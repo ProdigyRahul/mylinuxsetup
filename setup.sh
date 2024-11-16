@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if script is run as root
-if [ "$EUID" -ne 0 ]; then 
+if [ "$EUID" -ne 0 ]; then
     echo "Please run as root or with sudo"
     exit 1
 fi
@@ -47,7 +47,9 @@ sudo -u $REAL_USER yay -S --noconfirm \
     google-chrome \
     spotify \
     nvm \
-    pgadmin4-desktop
+    pgadmin4-desktop \
+    discord \
+    zoom
 check_status "AUR packages installation"
 
 # Install official packages
@@ -67,7 +69,9 @@ pacman -S --noconfirm \
     obs-studio \
     telegram-desktop \
     ttf-fira-code \
-    ttf-firacode-nerd
+    ttf-firacode-nerd \
+    python-virtualenv \
+    redis
 check_status "Official packages installation"
 
 # Configure Java environment for the real user
@@ -94,11 +98,16 @@ use_java23() {
     java -version
 }
 
+# Android SDK configuration
+export ANDROID_HOME=\$HOME/Android/Sdk
+export PATH=\$PATH:\$ANDROID_HOME/emulator
+export PATH=\$PATH:\$ANDROID_HOME/platform-tools
+
 # NVM configuration
 export NVM_DIR=\"\$HOME/.nvm\"
 [ -s \"/usr/share/nvm/init-nvm.sh\" ] && \\. \"/usr/share/nvm/init-nvm.sh\"
 EOL"
-check_status "Java and NVM configuration"
+check_status "Java and environment configuration"
 
 # Configure PostgreSQL
 print_status "Configuring PostgreSQL"
@@ -114,12 +123,23 @@ print_status "Setting PostgreSQL password"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '123456';"
 check_status "PostgreSQL password configuration"
 
+# Configure and start Redis
+print_status "Configuring Redis"
+systemctl start redis
+systemctl enable redis
+check_status "Redis service configuration"
+
 # Enable and start Docker service
 print_status "Enabling Docker service"
 systemctl enable docker
 systemctl start docker
 usermod -aG docker $REAL_USER
 check_status "Docker service configuration"
+
+# Switch to bash and install Node LTS
+print_status "Installing Node LTS using nvm"
+sudo -u $REAL_USER bash -c "source $HOME_DIR/.bashrc && nvm install --lts"
+check_status "Node LTS installation"
 
 print_status "Installation completed successfully!"
 echo "Please log out and log back in for group changes to take effect."
