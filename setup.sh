@@ -70,6 +70,7 @@ pacman -S --noconfirm \
     telegram-desktop \
     ttf-fira-code \
     ttf-firacode-nerd \
+    ttf-hack-nerd \
     python-virtualenv \
     redis
 check_status "Official packages installation"
