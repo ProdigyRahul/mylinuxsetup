@@ -47,7 +47,6 @@ sudo -u $REAL_USER yay -S --noconfirm \
     google-chrome \
     spotify \
     nvm \
-    pgadmin4-desktop \
     discord \
     zoom
 check_status "AUR packages installation"
@@ -137,10 +136,6 @@ systemctl start docker
 usermod -aG docker $REAL_USER
 check_status "Docker service configuration"
 
-# Switch to bash and install Node LTS
-print_status "Installing Node LTS using nvm"
-sudo -u $REAL_USER bash -c "source $HOME_DIR/.bashrc && nvm install --lts"
-check_status "Node LTS installation"
 
 print_status "Installation completed successfully!"
 echo "Please log out and log back in for group changes to take effect."
