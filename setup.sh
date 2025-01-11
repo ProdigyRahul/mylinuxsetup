@@ -72,6 +72,13 @@ AUR_PACKAGES=(
     "nvm"
     "discord"
     "zoom"
+    "visual-studio-code-bin"
+    "insomnia-bin"           # REST API client alternative to Postman
+    "dbeaver"                # Universal database tool
+    "slack-desktop"          # Team communication
+    "figma-linux"           # Design tool
+    "notion-app"            # Note-taking and collaboration
+    "docker-desktop"        # Docker GUI
 )
 
 for package in "${AUR_PACKAGES[@]}"; do
@@ -104,6 +111,16 @@ OFFICIAL_PACKAGES=(
     "ttf-hack-nerd"
     "python-virtualenv"
     "redis"
+    "git"
+    "base-devel"        # Essential for development
+    "python-pip"       # Python package manager
+    "cmake"            # Build system
+    "vim"              # Text editor
+    "neovim"           # Modern vim
+    "htop"             # Process viewer
+    "tmux"             # Terminal multiplexer
+    "wget"             # File downloader
+    "curl"             # URL transfer tool
 )
 
 for package in "${OFFICIAL_PACKAGES[@]}"; do
