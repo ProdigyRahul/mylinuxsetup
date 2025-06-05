@@ -65,20 +65,15 @@ print_status "Installing AUR packages"
 AUR_PACKAGES=(
     "android-studio"
     "postman-bin"
-    "mongodb-compass"
-    "mongodb-bin"
     "google-chrome"
     "spotify"
     "nvm"
-    "discord"
     "zoom"
+    "cursor-bin"
+    "windsurf"
     "visual-studio-code-bin"
-    "insomnia-bin"           # REST API client alternative to Postman
-    "dbeaver"                # Universal database tool
-    "slack-desktop"          # Team communication
-    "figma-linux"           # Design tool
-    "notion-app"            # Note-taking and collaboration
-    "docker-desktop"        # Docker GUI
+    "extension-manager"
+    "yay"
 )
 
 for package in "${AUR_PACKAGES[@]}"; do
@@ -121,6 +116,16 @@ OFFICIAL_PACKAGES=(
     "tmux"             # Terminal multiplexer
     "wget"             # File downloader
     "curl"             # URL transfer tool
+    "qemu-full"
+    " qemu-img" 
+    "libvirt" 
+    "virt-install" 
+    "virt-manager" 
+    "virt-viewer"
+    "edk2-ovmf"
+    "swtpm"
+    "guestfs-tools" 
+    "libosinfo"
 )
 
 for package in "${OFFICIAL_PACKAGES[@]}"; do
@@ -178,6 +183,10 @@ if [ ! -d "/var/lib/postgres/data" ] || [ -z "$(ls -A /var/lib/postgres/data)" ]
     sudo -u postgres initdb -D /var/lib/postgres/data
     systemctl start postgresql
     systemctl enable postgresql
+    systemctl enable libvirtd.service
+    systemctl start libvirtd.service
+    virsh net-start default
+    virsh net-autostart default
     # Set PostgreSQL password
     print_status "Setting PostgreSQL password"
     sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '123456';"
