@@ -73,7 +73,10 @@ AUR_PACKAGES=(
     "windsurf"
     "visual-studio-code-bin"
     "extension-manager"
-    "yay"
+    "redis"
+    "zed"
+    "zen-browser-bin"
+    
 )
 
 for package in "${AUR_PACKAGES[@]}"; do
