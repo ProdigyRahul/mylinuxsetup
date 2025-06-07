@@ -63,20 +63,16 @@ check_status "System update"
 # Install AUR packages as non-root user
 print_status "Installing AUR packages"
 AUR_PACKAGES=(
-    "android-studio"
     "postman-bin"
     "google-chrome"
-    "spotify"
     "nvm"
-    "zoom"
     "cursor-bin"
     "windsurf"
     "visual-studio-code-bin"
     "extension-manager"
     "redis"
     "zed"
-    "zen-browser-bin"
-    
+    "zen-browser-bin"    
 )
 
 for package in "${AUR_PACKAGES[@]}"; do
@@ -96,14 +92,7 @@ OFFICIAL_PACKAGES=(
     "docker-compose"
     "github-cli"
     "postgresql"
-    "jdk-openjdk"
-    "jdk17-openjdk"
-    "android-tools"
     "gimp"
-    "blender"
-    "inkscape"
-    "libreoffice-fresh"
-    "obs-studio"
     "ttf-fira-code"
     "ttf-firacode-nerd"
     "ttf-hack-nerd"
